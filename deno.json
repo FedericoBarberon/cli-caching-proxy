@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "dev": "deno run --watch -N main.ts --origin='https://jsonplaceholder.typicode.com/'"
+  },
+  "imports": {
+    "@std/cli": "jsr:@std/cli@^1.0.28",
+    "@std/fs": "jsr:@std/fs@^1.0.23"
+  }
+}
