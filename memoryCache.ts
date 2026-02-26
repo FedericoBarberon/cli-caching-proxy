@@ -22,6 +22,11 @@ export class MemoryCache implements Cache {
     return Promise.resolve(this.cache.delete(this.generateKey(request)));
   }
 
+  deleteAll(): Promise<void> {
+    this.cache.clear();
+    return Promise.resolve();
+  }
+
   private generateKey(request: RequestInfo | URL): string {
     if (request instanceof URL) return request.href;
     if (request instanceof Request) return request.url;

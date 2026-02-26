@@ -6,6 +6,7 @@ export interface Cache {
     options?: SetOptions,
   ): Promise<void>;
   delete(request: RequestInfo | URL): Promise<boolean>;
+  deleteAll(): Promise<void>;
 }
 
 export interface SetOptions {
