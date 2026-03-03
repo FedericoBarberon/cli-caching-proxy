@@ -1,10 +1,10 @@
 import { MemoryCache } from "./memoryCache.ts";
-import { Cache } from "./Cache.d.ts";
+import { CacheClass } from "./Cache.d.ts";
 import { parseArgs } from "@std/cli/parse-args";
 import { createHandler } from "./handler.ts";
 import { LogLevel, setCurrentLevel } from "./logger.ts";
 
-const caches: Cache[] = [new MemoryCache()];
+const caches: CacheClass[] = [MemoryCache];
 
 const flags = parseArgs(Deno.args, {
   string: ["port", "origin"],
@@ -21,7 +21,7 @@ if (flags.debug) {
 }
 
 if (flags["clear-cache"]) {
-  await Promise.all(caches.map((cache) => cache.deleteAll()));
+  await Promise.all(caches.map((cache) => cache.clearAll()));
   Deno.exit(0);
 }
 
@@ -41,4 +41,5 @@ if (isNaN(port)) {
 
 const baseURL = new URL(flags.origin);
 
-Deno.serve({ port }, createHandler(baseURL, caches));
+const cachesInstances = caches.map((Cache) => new Cache(baseURL));
+Deno.serve({ port }, createHandler(baseURL, cachesInstances));

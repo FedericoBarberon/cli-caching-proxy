@@ -1,3 +1,8 @@
+export interface CacheClass {
+  new (baseURL: URL): Cache;
+  clearAll(): Promise<void>;
+}
+
 export interface Cache {
   get(request: RequestInfo | URL): Promise<Response | null>;
   set(
@@ -6,7 +11,6 @@ export interface Cache {
     options?: SetOptions,
   ): Promise<void>;
   delete(request: RequestInfo | URL): Promise<boolean>;
-  deleteAll(): Promise<void>;
 }
 
 export interface SetOptions {

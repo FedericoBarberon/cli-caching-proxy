@@ -1,4 +1,5 @@
 import { Cache, SetOptions } from "./Cache.d.ts";
+import { normalizeRequest } from "./utils/normalizeRequest.ts";
 
 export class MemoryCache implements Cache {
   private cache: Map<string, Response>;
@@ -8,28 +9,21 @@ export class MemoryCache implements Cache {
   }
 
   get(request: RequestInfo | URL): Promise<Response | null> {
-    return Promise.resolve(this.cache.get(this.generateKey(request)) ?? null);
+    return Promise.resolve(this.cache.get(normalizeRequest(request)) ?? null);
   }
   set(
     request: RequestInfo | URL,
     response: Response,
     _options?: SetOptions,
   ): Promise<void> {
-    this.cache.set(this.generateKey(request), response.clone());
+    this.cache.set(normalizeRequest(request), response.clone());
     return Promise.resolve();
   }
   delete(request: RequestInfo | URL): Promise<boolean> {
-    return Promise.resolve(this.cache.delete(this.generateKey(request)));
+    return Promise.resolve(this.cache.delete(normalizeRequest(request)));
   }
 
-  deleteAll(): Promise<void> {
-    this.cache.clear();
+  static clearAll(): Promise<void> {
     return Promise.resolve();
-  }
-
-  private generateKey(request: RequestInfo | URL): string {
-    if (request instanceof URL) return request.href;
-    if (request instanceof Request) return request.url;
-    return request;
   }
 }
