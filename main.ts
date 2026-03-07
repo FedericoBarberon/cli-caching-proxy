@@ -2,7 +2,7 @@ import { MemoryCache } from "./memoryCache.ts";
 import { CacheClass } from "./Cache.d.ts";
 import { parseArgs } from "@std/cli/parse-args";
 import { createHandler } from "./handler.ts";
-import { LogLevel, setCurrentLevel } from "./logger.ts";
+import { log, LogLevel, setCurrentLevel } from "./logger.ts";
 
 const caches: CacheClass[] = [MemoryCache];
 
@@ -18,6 +18,7 @@ const flags = parseArgs(Deno.args, {
 
 if (flags.debug) {
   setCurrentLevel(LogLevel.DEBUG);
+  log(LogLevel.DEBUG, "Debug mode enabled");
 }
 
 if (flags["clear-cache"]) {
@@ -42,4 +43,9 @@ if (isNaN(port)) {
 const baseURL = new URL(flags.origin);
 
 const cachesInstances = caches.map((Cache) => new Cache(baseURL));
-Deno.serve({ port }, createHandler(baseURL, cachesInstances));
+Deno.serve({
+  port,
+  onListen: ({ port, hostname }) => {
+    log(LogLevel.INFO, "Server started on", `${hostname}:${port}`);
+  },
+}, createHandler(baseURL, cachesInstances));

@@ -1,11 +1,13 @@
 {
   "tasks": {
-    "dev": "deno run --watch -N main.ts --origin='https://jsonplaceholder.typicode.com/'"
+    "dev": "deno run --watch -N main.ts --debug --origin='https://jsonplaceholder.typicode.com/'"
   },
   "imports": {
     "@std/cli": "jsr:@std/cli@^1.0.28",
+    "@std/encoding": "jsr:@std/encoding@^1.0.10",
     "@std/fmt": "jsr:@std/fmt@^1.0.9",
     "@std/fs": "jsr:@std/fs@^1.0.23",
-    "@std/path": "jsr:@std/path@^1.1.4"
+    "@std/path": "jsr:@std/path@^1.1.4",
+    "normalize-url": "npm:normalize-url@^9.0.0"
   }
 }

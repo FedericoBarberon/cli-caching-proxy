@@ -1,5 +1,6 @@
 import { Cache, SetOptions } from "./Cache.d.ts";
-import { normalizeRequest } from "./utils/normalizeRequest.ts";
+import { log, LogLevel } from "./logger.ts";
+import { hashRequest } from "./utils/hashRequest.ts";
 
 export class MemoryCache implements Cache {
   private cache: Map<string, Response>;
@@ -8,19 +9,41 @@ export class MemoryCache implements Cache {
     this.cache = new Map();
   }
 
-  get(request: RequestInfo | URL): Promise<Response | null> {
-    return Promise.resolve(this.cache.get(normalizeRequest(request)) ?? null);
+  async get(request: RequestInfo | URL): Promise<Response | null> {
+    const hashedRequest = await hashRequest(request);
+    const entry = this.cache.get(hashedRequest) ?? null;
+
+    log(
+      LogLevel.DEBUG,
+      "memory-cache get",
+      hashedRequest,
+      entry ? "HIT" : "MISS",
+    );
+
+    return entry;
   }
-  set(
+
+  async set(
     request: RequestInfo | URL,
     response: Response,
     _options?: SetOptions,
   ): Promise<void> {
-    this.cache.set(normalizeRequest(request), response.clone());
-    return Promise.resolve();
+    const hashedRequest = await hashRequest(request);
+    this.cache.set(hashedRequest, response.clone());
+
+    log(
+      LogLevel.DEBUG,
+      "memory-cache set",
+      hashedRequest,
+      "cache size:",
+      this.cache.size,
+    );
   }
-  delete(request: RequestInfo | URL): Promise<boolean> {
-    return Promise.resolve(this.cache.delete(normalizeRequest(request)));
+
+  async delete(request: RequestInfo | URL): Promise<boolean> {
+    const hashedRequest = await hashRequest(request);
+    log(LogLevel.DEBUG, "memory-cache delete", hashedRequest);
+    return this.cache.delete(hashedRequest);
   }
 
   static clearAll(): Promise<void> {

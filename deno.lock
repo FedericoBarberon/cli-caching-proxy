@@ -2,10 +2,12 @@
   "version": "5",
   "specifiers": {
     "jsr:@std/cli@^1.0.28": "1.0.28",
+    "jsr:@std/encoding@^1.0.10": "1.0.10",
     "jsr:@std/fmt@^1.0.9": "1.0.9",
     "jsr:@std/fs@^1.0.23": "1.0.23",
     "jsr:@std/internal@^1.0.12": "1.0.12",
-    "jsr:@std/path@^1.1.4": "1.1.4"
+    "jsr:@std/path@^1.1.4": "1.1.4",
+    "npm:normalize-url@9": "9.0.0"
   },
   "jsr": {
     "@std/cli@1.0.28": {
@@ -14,6 +16,9 @@
         "jsr:@std/fmt",
         "jsr:@std/internal"
       ]
+    },
+    "@std/encoding@1.0.10": {
+      "integrity": "8783c6384a2d13abd5e9e87a7ae0520a30e9f56aeeaa3bdf910a3eaaf5c811a1"
     },
     "@std/fmt@1.0.9": {
       "integrity": "2487343e8899fb2be5d0e3d35013e54477ada198854e52dd05ed0422eddcabe0"
@@ -35,12 +40,19 @@
       ]
     }
   },
+  "npm": {
+    "normalize-url@9.0.0": {
+      "integrity": "sha512-z9nC87iaZXXySbWWtTHfCFJyFvKaUAW6lODhikG7ILSbVgmwuFjUqkgnheHvAUcGedO29e2QGBRXMUD64aurqQ=="
+    }
+  },
   "workspace": {
     "dependencies": [
       "jsr:@std/cli@^1.0.28",
+      "jsr:@std/encoding@^1.0.10",
       "jsr:@std/fmt@^1.0.9",
       "jsr:@std/fs@^1.0.23",
-      "jsr:@std/path@^1.1.4"
+      "jsr:@std/path@^1.1.4",
+      "npm:normalize-url@9"
     ]
   }
 }
