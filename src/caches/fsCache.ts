@@ -1,9 +1,9 @@
-import { Cache, SetOptions } from "./Cache.d.ts";
+import { Cache, SetOptions } from "../Cache.d.ts";
 import { exists } from "@std/fs/exists";
 import { join } from "@std/path";
-import { hashRequest } from "./utils/hashRequest.ts";
-import { parseMetadata, serializeMetadata } from "./utils/metadata.ts";
-import { log, LogLevel } from "./logger.ts";
+import { hashRequest } from "../utils/hashRequest.ts";
+import { parseMetadata, serializeMetadata } from "../utils/metadata.ts";
+import { log, LogLevel } from "../logger.ts";
 
 const CACHE_PATH = "./.cache";
 const METADATA_FILENAME = "metadata.json";

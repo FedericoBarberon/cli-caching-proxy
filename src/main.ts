@@ -1,9 +1,8 @@
-import { MemoryCache } from "./memoryCache.ts";
+import { FsCache, MemoryCache } from "./caches/index.ts";
 import { CacheClass } from "./Cache.d.ts";
 import { parseArgs } from "@std/cli/parse-args";
 import { createHandler } from "./handler.ts";
 import { log, LogLevel, setCurrentLevel } from "./logger.ts";
-import { FsCache } from "./fsCache.ts";
 
 const caches: CacheClass[] = [MemoryCache, FsCache];
 

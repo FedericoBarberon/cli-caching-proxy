@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "dev": "deno run --watch -NRW main.ts --debug --origin='https://jsonplaceholder.typicode.com/'"
+    "dev": "deno run --watch -NRW src/main.ts --debug --origin='https://jsonplaceholder.typicode.com/'"
   },
   "imports": {
     "@std/cli": "jsr:@std/cli@^1.0.28",

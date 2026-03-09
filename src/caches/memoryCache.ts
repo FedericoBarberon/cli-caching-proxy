@@ -1,6 +1,6 @@
-import { Cache, SetOptions } from "./Cache.d.ts";
-import { log, LogLevel } from "./logger.ts";
-import { hashRequest } from "./utils/hashRequest.ts";
+import { Cache, SetOptions } from "../Cache.d.ts";
+import { log, LogLevel } from "../logger.ts";
+import { hashRequest } from "../utils/hashRequest.ts";
 
 export class MemoryCache implements Cache {
   private cache: Map<string, Response>;
