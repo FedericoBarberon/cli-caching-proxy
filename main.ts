@@ -3,8 +3,9 @@ import { CacheClass } from "./Cache.d.ts";
 import { parseArgs } from "@std/cli/parse-args";
 import { createHandler } from "./handler.ts";
 import { log, LogLevel, setCurrentLevel } from "./logger.ts";
+import { FsCache } from "./fsCache.ts";
 
-const caches: CacheClass[] = [MemoryCache];
+const caches: CacheClass[] = [MemoryCache, FsCache];
 
 const flags = parseArgs(Deno.args, {
   string: ["port", "origin"],
@@ -42,7 +43,7 @@ if (isNaN(port)) {
 
 const baseURL = new URL(flags.origin);
 
-const cachesInstances = caches.map((Cache) => new Cache(baseURL));
+const cachesInstances = caches.map((Cache) => new Cache());
 Deno.serve({
   port,
   onListen: ({ port, hostname }) => {

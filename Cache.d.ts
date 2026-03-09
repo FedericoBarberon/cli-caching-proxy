@@ -1,5 +1,5 @@
 export interface CacheClass {
-  new (baseURL: URL): Cache;
+  new (): Cache;
   clearAll(): Promise<void>;
 }
 
