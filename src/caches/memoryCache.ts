@@ -1,4 +1,4 @@
-import { Cache, SetOptions } from "../Cache.d.ts";
+import { Cache, SetOptions } from "./Cache.d.ts";
 import { log, LogLevel } from "../logger.ts";
 import { hashRequest } from "../utils/hashRequest.ts";
 

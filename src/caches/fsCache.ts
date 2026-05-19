@@ -1,4 +1,4 @@
-import { Cache, SetOptions } from "../Cache.d.ts";
+import { Cache, SetOptions } from "./Cache.d.ts";
 import { exists } from "@std/fs/exists";
 import { join } from "@std/path";
 import { hashRequest } from "../utils/hashRequest.ts";

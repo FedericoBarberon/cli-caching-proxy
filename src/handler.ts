@@ -1,5 +1,5 @@
 import { log, LogLevel } from "./logger.ts";
-import { Cache } from "./Cache.d.ts";
+import type { Cache } from "./caches/index.ts";
 import { green, red } from "@std/fmt/colors";
 
 const CACHEABLES_METHODS = ["GET", "HEAD"];

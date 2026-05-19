@@ -1,5 +1,5 @@
 import { FsCache, MemoryCache } from "./caches/index.ts";
-import { CacheClass } from "./Cache.d.ts";
+import type { CacheClass } from "./caches/index.ts";
 import { parseArgs } from "@std/cli/parse-args";
 import { createHandler } from "./handler.ts";
 import { log, LogLevel, setCurrentLevel } from "./logger.ts";
